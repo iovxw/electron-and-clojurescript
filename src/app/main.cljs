@@ -1,7 +1,8 @@
-(ns app.main) 
+(ns app.main)
 
-(def app           (js/require "app"))
-(def BrowserWindow (js/require "browser-window"))
+(def electron      (js/require "electron"))
+(def app           (.-app electron))
+(def BrowserWindow (.-BrowserWindow electron))
 
 (goog-define dev? false)
 
@@ -15,8 +16,8 @@
   at compile time using the `:clojure-defines` compiler option."
   [window]
   (if dev?
-      (.loadUrl window (str "file://" js/__dirname "/../../index.html"))
-      (.loadUrl window (str "file://" js/__dirname "/index.html"))))
+      (.loadURL window (str "file://" js/__dirname "/../../index.html"))
+      (.loadURL window (str "file://" js/__dirname "/index.html"))))
 
 (def main-window (atom nil))
 
